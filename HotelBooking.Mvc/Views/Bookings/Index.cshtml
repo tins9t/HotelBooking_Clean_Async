@@ -1,0 +1,85 @@
+﻿@model HotelBooking.Mvc.Models.BookingViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    int year = Model.YearToDisplay;
+}
+
+<h2>Bookings</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<p>
+    <a asp-action="Index" asp-route-id="@(year+1)">Next year</a>
+    <a asp-action="Index" asp-route-id="@(year-1)">Previous year</a>
+</p>
+
+@*Calender display*@
+<table class="table">
+    <tr>
+        <th>@year</th>
+        @for (int day = 1; day <= 31; day++)
+        {
+            <th>@day</th>
+        }
+    </tr>
+
+    @for (int month = 1; month <= 12; month++)
+    {
+        <tr>
+            <td>
+                @Model.GetMonthName(month)
+            </td>
+
+            @for (int day = 1; day <= 31; day++)
+            {
+                <td @if (Model.DateIsOccupied(year, month, day)) { <text> class="bg-danger" </text>  }></td>
+            }
+        </tr>
+    }
+</table>
+
+@*List of bookings*@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <h4>Start date</h4>
+            </th>
+            <th>
+                <h4>End date</h4>
+            </th>
+            <th>
+                <h4>IsActive</h4>
+            </th>
+            <th>
+                <h4>Customer</h4>
+            </th>
+            <th>
+                <h4>Room</h4>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Bookings) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Room.Id)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
