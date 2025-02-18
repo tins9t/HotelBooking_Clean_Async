@@ -7,6 +7,7 @@ using Xunit;
 
 namespace HotelBooking.UnitTests;
 
+[Collection("BookingManager collection")]
 public class CreateBookingTests
 {
         BookingManagerFixture _fixture;
