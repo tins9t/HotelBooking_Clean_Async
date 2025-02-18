@@ -4,28 +4,28 @@ using HotelBooking.UnitTests.Fakes;
 using Xunit;
 using System.Linq;
 using System.Threading.Tasks;
+using HotelBooking.UnitTests.TestFixtures;
 
 
 namespace HotelBooking.UnitTests
 {
+    [Collection("BookingManager collection")]
     public class BookingManagerTests
     {
-        private IBookingManager bookingManager;
-        IRepository<Booking> bookingRepository;
-
-        public BookingManagerTests(){
-            DateTime start = DateTime.Today.AddDays(10);
-            DateTime end = DateTime.Today.AddDays(20);
-            bookingRepository = new FakeBookingRepository(start, end);
-            IRepository<Room> roomRepository = new FakeRoomRepository();
-            bookingManager = new BookingManager(bookingRepository, roomRepository);
+        BookingManagerFixture _fixture;
+    
+        public BookingManagerTests(BookingManagerFixture fixture)
+        {
+            _fixture = fixture;
         }
+        
 
         [Fact]
         public async Task FindAvailableRoom_StartDateNotInTheFuture_ThrowsArgumentException()
         {
             // Arrange
             DateTime date = DateTime.Today;
+            var bookingManager = _fixture.BookingManager;
 
             // Act
             Task result() => bookingManager.FindAvailableRoom(date, date);
@@ -39,6 +39,8 @@ namespace HotelBooking.UnitTests
         {
             // Arrange
             DateTime date = DateTime.Today.AddDays(1);
+            var bookingManager = _fixture.BookingManager;
+
             // Act
             int roomId = await bookingManager.FindAvailableRoom(date, date);
             // Assert
@@ -53,11 +55,13 @@ namespace HotelBooking.UnitTests
 
             // Arrange
             DateTime date = DateTime.Today.AddDays(1);
+            var bookingManager = _fixture.BookingManager;
+            var bookingRepository = _fixture.mockBookingRepository;
             
             // Act
             int roomId = await bookingManager.FindAvailableRoom(date, date);
 
-            var bookingForReturnedRoomId = (await bookingRepository.GetAllAsync()).
+            var bookingForReturnedRoomId = (await bookingRepository.Object.GetAllAsync()).
                 Where(b => b.RoomId == roomId
                            && b.StartDate <= date
                            && b.EndDate >= date
