@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using HotelBooking.Core;
 using HotelBooking.UnitTests.TestFixtures;
 using Xunit;
+using Moq;
 
 namespace HotelBooking.UnitTests;
 
@@ -15,6 +16,31 @@ public class CreateBookingTests
         public CreateBookingTests(BookingManagerFixture fixture)
         {
             _fixture = fixture;
+             List<Booking> bookings = new List<Booking>()
+                    {
+                        // Fully occupied period for Room 1 and Room 2
+                        new Booking
+                        {
+                            Id = 1,
+                            StartDate = DateTime.Today.AddDays(10),
+                            EndDate = DateTime.Today.AddDays(20),
+                            IsActive = true,
+                            CustomerId = 1,
+                            RoomId = 1
+                        },
+                        new Booking
+                        {
+                            Id = 2,
+                            StartDate = DateTime.Today.AddDays(10),
+                            EndDate = DateTime.Today.AddDays(20),
+                            IsActive = true,
+                            CustomerId = 2,
+                            RoomId = 2
+                        },
+                    };
+             
+             _fixture.mockBookingRepository.Setup(b => b.GetAllAsync()).ReturnsAsync(bookings);
+                    
         }
 
         // Test: Booking is accepted when no days are occupied for the desired period (for all rooms).
@@ -84,25 +110,4 @@ public class CreateBookingTests
             Assert.False(result);
         }
         
-        // [Theory]
-        // [InlineData("2025-02-01", "2025-03-28", 11)]
-        // Note: Is it even possible to test this method with constant DateTime values because
-        // the method checks if the start date is in the past? The test would stop working at some point in the future.
-        
-        [Fact]
-        public async Task GetFullyOccupiedDates_TestDataHasElevenFullyOccupiedDates_ReturnsAllDates()
-        {
-            // Arrange
-            DateTime startDate = DateTime.Today.AddDays(-1);
-            DateTime endDate = DateTime.Today.AddDays(30);
-            // DateTime startDate = DateTime.Parse(startDateString);
-            // DateTime endDate = DateTime.Parse(endDateString);
-            var bookingManager = _fixture.BookingManager;
-            
-            // Act
-            List<DateTime> fullyOccupiedDates = await bookingManager.GetFullyOccupiedDates(startDate, endDate);
-            
-            // Assert
-            Assert.Equal(11, fullyOccupiedDates.Count);
-        }
 }

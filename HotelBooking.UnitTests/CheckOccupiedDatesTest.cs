@@ -5,21 +5,22 @@ using System.Threading.Tasks;
 using Moq;
 using Xunit;
 using HotelBooking.Core;
+using HotelBooking.UnitTests.TestFixtures;
 
-namespace HotelBooking.UnitTests.TestFixtures
+namespace HotelBooking.UnitTests
 {
     [Collection("BookingManager collection")]
     public class CheckOccupiedDatesTest
     {
         private readonly Mock<IRepository<Room>> _roomRepositoryMock;
         private readonly Mock<IRepository<Booking>> _bookingRepositoryMock;
-        private readonly IBookingManager _bookingManager;
+        BookingManagerFixture _fixture;
 
-        public CheckOccupiedDatesTest()
+        public CheckOccupiedDatesTest(BookingManagerFixture fixture)
         {
+            _fixture = fixture;
             _roomRepositoryMock = new Mock<IRepository<Room>>();
             _bookingRepositoryMock = new Mock<IRepository<Booking>>();
-            _bookingManager = new BookingManager(_bookingRepositoryMock.Object, _roomRepositoryMock.Object);
         }
 
         [Fact]
@@ -28,9 +29,11 @@ namespace HotelBooking.UnitTests.TestFixtures
             // Arrange
             var startDate = DateTime.Now.AddDays(10);
             var endDate = DateTime.Now.AddDays(5); // Start date is after end date
+            
+            var bookingManager = _fixture.BookingManager;
 
             // Act & Assert
-            await Assert.ThrowsAsync<ArgumentException>(() => _bookingManager.GetFullyOccupiedDates(startDate, endDate));
+            await Assert.ThrowsAsync<ArgumentException>(() => bookingManager.GetFullyOccupiedDates(startDate, endDate));
         }
 
         [Fact]
@@ -42,9 +45,11 @@ namespace HotelBooking.UnitTests.TestFixtures
 
             var startDate = DateTime.Now.AddDays(30);
             var endDate = DateTime.Now.AddDays(35);
+            
+            var bookingManager = _fixture.BookingManager;
 
             // Act
-            var result = await _bookingManager.GetFullyOccupiedDates(startDate, endDate);
+            var result = await bookingManager.GetFullyOccupiedDates(startDate, endDate);
 
             // Assert
             Assert.Empty(result);
@@ -54,21 +59,20 @@ namespace HotelBooking.UnitTests.TestFixtures
         public async Task GetFullyOccupiedDates_WhenAllRoomsBooked_ShouldReturnAllDatesInRange()
         {
             // Arrange
-            var rooms = new List<Room> { new Room { Id = 1 }, new Room { Id = 2 } };
             var bookingStart = DateTime.Now.AddDays(40);
             var bookingEnd = DateTime.Now.AddDays(43);
-
+            
             var bookings = new List<Booking>
             {
                 new Booking { StartDate = bookingStart, EndDate = bookingEnd, IsActive = true, RoomId = 1 },
                 new Booking { StartDate = bookingStart, EndDate = bookingEnd, IsActive = true, RoomId = 2 }
             };
-
-            _roomRepositoryMock.Setup(r => r.GetAllAsync()).ReturnsAsync(rooms);
-            _bookingRepositoryMock.Setup(b => b.GetAllAsync()).ReturnsAsync(bookings);
+            
+            var bookingManager = _fixture.BookingManager;
+            _fixture.mockBookingRepository.Setup(b => b.GetAllAsync()).ReturnsAsync(bookings);
 
             // Act
-            var result = await _bookingManager.GetFullyOccupiedDates(bookingStart, bookingEnd);
+            var result = await bookingManager.GetFullyOccupiedDates(bookingStart, bookingEnd);
 
             // Assert
             Assert.Equal((bookingEnd - bookingStart).Days + 1, result.Count);
@@ -82,7 +86,6 @@ namespace HotelBooking.UnitTests.TestFixtures
         public async Task GetFullyOccupiedDates_WhenSomeDaysAreFullyBooked_ShouldReturnOnlyThoseDays()
         {
             // Arrange
-            var rooms = new List<Room> { new Room { Id = 1 }, new Room { Id = 2 } };
             var bookingStart = DateTime.Now.AddDays(50);
             var bookingEnd = DateTime.Now.AddDays(55);
 
@@ -92,7 +95,7 @@ namespace HotelBooking.UnitTests.TestFixtures
                 bookingStart.AddDays(2), // Day 52
                 bookingStart.AddDays(3)  // Day 53
             };
-
+            
             var bookings = new List<Booking>
             {
                 new Booking { StartDate = fullyBookedDays[0], EndDate = fullyBookedDays[0], IsActive = true, RoomId = 1 },
@@ -100,12 +103,12 @@ namespace HotelBooking.UnitTests.TestFixtures
                 new Booking { StartDate = fullyBookedDays[1], EndDate = fullyBookedDays[1], IsActive = true, RoomId = 1 },
                 new Booking { StartDate = fullyBookedDays[1], EndDate = fullyBookedDays[1], IsActive = true, RoomId = 2 }
             };
-
-            _roomRepositoryMock.Setup(r => r.GetAllAsync()).ReturnsAsync(rooms);
-            _bookingRepositoryMock.Setup(b => b.GetAllAsync()).ReturnsAsync(bookings);
+            
+            var bookingManager = _fixture.BookingManager;
+            _fixture.mockBookingRepository.Setup(b => b.GetAllAsync()).ReturnsAsync(bookings);
 
             // Act
-            var result = await _bookingManager.GetFullyOccupiedDates(bookingStart, bookingEnd);
+            var result = await bookingManager.GetFullyOccupiedDates(bookingStart, bookingEnd);
 
             // Assert
             Assert.Equal(fullyBookedDays.Count, result.Count); // Expect 2 fully booked days
