@@ -12,15 +12,11 @@ namespace HotelBooking.UnitTests
     [Collection("BookingManager collection")]
     public class CheckOccupiedDatesTest
     {
-        private readonly Mock<IRepository<Room>> _roomRepositoryMock;
-        private readonly Mock<IRepository<Booking>> _bookingRepositoryMock;
         BookingManagerFixture _fixture;
 
         public CheckOccupiedDatesTest(BookingManagerFixture fixture)
         {
             _fixture = fixture;
-            _roomRepositoryMock = new Mock<IRepository<Room>>();
-            _bookingRepositoryMock = new Mock<IRepository<Booking>>();
         }
 
         [Fact]
@@ -40,8 +36,7 @@ namespace HotelBooking.UnitTests
         public async Task GetFullyOccupiedDates_WhenNoBookings_ShouldReturnEmptyList()
         {
             // Arrange
-            _roomRepositoryMock.Setup(r => r.GetAllAsync()).ReturnsAsync(new List<Room> { new Room(), new Room() });
-            _bookingRepositoryMock.Setup(b => b.GetAllAsync()).ReturnsAsync(new List<Booking>());
+            _fixture.mockBookingRepository.Setup(b => b.GetAllAsync()).ReturnsAsync(new List<Booking>());
 
             var startDate = DateTime.Now.AddDays(30);
             var endDate = DateTime.Now.AddDays(35);
