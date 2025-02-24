@@ -44,8 +44,12 @@ public class CreateBookingTests
     }
 
     /// <summary>
-    /// Booking is accepted when no days are occupied for the desired period (for all rooms).
+    /// Tests that a booking is accepted when no days are occupied for the desired period (for all rooms).
     /// </summary>
+    /// <param name="numberOfDays1">The number of days from today to the start date of the booking.</param>
+    /// <param name="numberOfDays2">The number of days from today to the end date of the booking.</param>
+    /// <param name="expectedResult">The expected result of the booking creation.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
     [Theory]
     [InlineData(1, 1, true)]
     [InlineData(1, 9, true)]
@@ -71,6 +75,12 @@ public class CreateBookingTests
         Assert.Equal(result, expectedResult);
     }
     
+    /// <summary>
+    /// Tests that a booking is not accepted when the dates are invalid.
+    /// </summary>
+    /// <param name="numberOfDays1">The number of days from today to the start date of the booking.</param>
+    /// <param name="numberOfDays2">The number of days from today to the end date of the booking.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
     [Theory]
     [InlineData(-1, 1)]
     [InlineData(0, 1)]
@@ -95,8 +105,10 @@ public class CreateBookingTests
     }
 
     /// <summary>
-    /// A test with a start date before the fully occupied period and an end date after the fully occupied period.
+    /// Tests that a booking is not accepted when the start date is before the fully occupied period and
+    /// the end date is after the fully occupied period.
     /// </summary>
+    /// <returns>A task that represents the asynchronous operation.</returns>
     [Fact]
     public async Task CreateBooking_StartDateBeforeOccupiedPeriodEndDateAfterOccupiedPeriod_ReturnsFalse()
     {
@@ -120,8 +132,12 @@ public class CreateBookingTests
     }
 
     /// <summary>
-    /// A test with a start date before the fully occupied period and an end date within the fully occupied period.
+    /// Tests that a booking is not accepted when it overlaps with an existing booking.
     /// </summary>
+    /// <param name="numberOfDays1">The number of days from today to the start date of the booking.</param>
+    /// <param name="numberOfDays2">The number of days from today to the end date of the booking.</param>
+    /// <param name="expectedResult">The expected result of the booking creation.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
     [Theory]
     [InlineData(9, 10, false)]
     [InlineData(9, 15, false)]
