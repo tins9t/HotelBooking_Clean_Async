@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelBooking.Mvc", "HotelBo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelBooking.WebApi", "HotelBooking.WebApi\HotelBooking.WebApi.csproj", "{2A98B98E-16D8-4F8D-A2D2-E4C4377CBB30}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelBooking.Specs", "HotelBooking.Specs\HotelBooking.Specs.csproj", "{B51B2564-3C2C-4DA1-AB43-D4AB6B9D3F47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{2A98B98E-16D8-4F8D-A2D2-E4C4377CBB30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A98B98E-16D8-4F8D-A2D2-E4C4377CBB30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A98B98E-16D8-4F8D-A2D2-E4C4377CBB30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B51B2564-3C2C-4DA1-AB43-D4AB6B9D3F47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B51B2564-3C2C-4DA1-AB43-D4AB6B9D3F47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B51B2564-3C2C-4DA1-AB43-D4AB6B9D3F47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B51B2564-3C2C-4DA1-AB43-D4AB6B9D3F47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
