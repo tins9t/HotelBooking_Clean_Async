@@ -1,0 +1,860 @@
+{
+	"info": {
+		"_postman_id": "77d3f303-5f91-449f-9aa6-45483fa592a4",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43559072"
+	},
+	"item": [
+		{
+			"name": "CreateBookingTests",
+			"item": [
+				{
+					"name": "Create booking (BB)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const today = new Date();\r",
+									"\r",
+									"const startDate = new Date(today);\r",
+									"startDate.setDate(today.getDate() + 1);\r",
+									"\r",
+									"const endDate = new Date(today);\r",
+									"endDate.setDate(today.getDate() + 3);\r",
+									"\r",
+									"const startDateFormatted = startDate.toISOString().split('T')[0]; \r",
+									"const endDateFormatted = endDate.toISOString().split('T')[0]; \r",
+									"\r",
+									"pm.variables.set(\"startDate\", startDateFormatted);\r",
+									"pm.variables.set(\"endDate\", endDateFormatted);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status is 201 Created\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"startDate\": \"{{startDate}}\",\r\n  \"endDate\": \"{{endDate}}\",\r\n  \"customerId\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/Bookings",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"Bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create booking (AA)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const today = new Date();\r",
+									"\r",
+									"const startDate = new Date(today);\r",
+									"startDate.setDate(today.getDate() + 1);\r",
+									"\r",
+									"const endDate = new Date(today);\r",
+									"endDate.setDate(today.getDate() + 3);\r",
+									"\r",
+									"const startDateFormatted = startDate.toISOString().split('T')[0]; \r",
+									"const endDateFormatted = endDate.toISOString().split('T')[0]; \r",
+									"\r",
+									"pm.variables.set(\"startDate\", startDateFormatted);\r",
+									"pm.variables.set(\"endDate\", endDateFormatted);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status is 201 Created\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"startDate\": \"{{startDate}}\",\r\n  \"endDate\": \"{{endDate}}\",\r\n  \"customerId\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/Bookings",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"Bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create booking (BA)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const today = new Date();\r",
+									"\r",
+									"const startDate = new Date(today);\r",
+									"startDate.setDate(today.getDate() + 2);\r",
+									"\r",
+									"const endDate = new Date(today);\r",
+									"endDate.setDate(today.getDate() + 22);\r",
+									"\r",
+									"const startDateFormatted = startDate.toISOString().split('T')[0]; \r",
+									"const endDateFormatted = endDate.toISOString().split('T')[0]; \r",
+									"\r",
+									"pm.variables.set(\"startDate\", startDateFormatted);\r",
+									"pm.variables.set(\"endDate\", endDateFormatted);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status is 409 Created\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"startDate\": \"{{startDate}}\",\r\n  \"endDate\": \"{{endDate}}\",\r\n  \"customerId\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/Bookings",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"Bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create booking (BO)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const today = new Date();\r",
+									"\r",
+									"const startDate = new Date(today);\r",
+									"startDate.setDate(today.getDate() + 2);\r",
+									"\r",
+									"const endDate = new Date(today);\r",
+									"endDate.setDate(today.getDate() + 22);\r",
+									"\r",
+									"const startDateFormatted = startDate.toISOString().split('T')[0]; \r",
+									"const endDateFormatted = endDate.toISOString().split('T')[0]; \r",
+									"\r",
+									"pm.variables.set(\"startDate\", startDateFormatted);\r",
+									"pm.variables.set(\"endDate\", endDateFormatted);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status is 409 Created\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"startDate\": \"{{startDate}}\",\r\n  \"endDate\": \"{{endDate}}\",\r\n  \"customerId\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/Bookings",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"Bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create booking (OA)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const today = new Date();\r",
+									"\r",
+									"const startDate = new Date(today);\r",
+									"startDate.setDate(today.getDate() + 2);\r",
+									"\r",
+									"const endDate = new Date(today);\r",
+									"endDate.setDate(today.getDate() + 22);\r",
+									"\r",
+									"const startDateFormatted = startDate.toISOString().split('T')[0]; \r",
+									"const endDateFormatted = endDate.toISOString().split('T')[0]; \r",
+									"\r",
+									"pm.variables.set(\"startDate\", startDateFormatted);\r",
+									"pm.variables.set(\"endDate\", endDateFormatted);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status is 409 Created\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"startDate\": \"{{startDate}}\",\r\n  \"endDate\": \"{{endDate}}\",\r\n  \"customerId\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/Bookings",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"Bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create booking (OO)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const today = new Date();\r",
+									"\r",
+									"const startDate = new Date(today);\r",
+									"startDate.setDate(today.getDate() + 2);\r",
+									"\r",
+									"const endDate = new Date(today);\r",
+									"endDate.setDate(today.getDate() + 22);\r",
+									"\r",
+									"const startDateFormatted = startDate.toISOString().split('T')[0]; \r",
+									"const endDateFormatted = endDate.toISOString().split('T')[0]; \r",
+									"\r",
+									"pm.variables.set(\"startDate\", startDateFormatted);\r",
+									"pm.variables.set(\"endDate\", endDateFormatted);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status is 409 Created\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"startDate\": \"{{startDate}}\",\r\n  \"endDate\": \"{{endDate}}\",\r\n  \"customerId\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/Bookings",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"Bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create booking (P-)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const today = new Date();\r",
+									"\r",
+									"const startDate = new Date(today);\r",
+									"startDate.setDate(today.getDate() -5);\r",
+									"\r",
+									"const endDate = new Date(today);\r",
+									"endDate.setDate(today.getDate() + 3);\r",
+									"\r",
+									"const startDateFormatted = startDate.toISOString().split('T')[0]; \r",
+									"const endDateFormatted = endDate.toISOString().split('T')[0]; \r",
+									"\r",
+									"pm.variables.set(\"startDate\", startDateFormatted);\r",
+									"pm.variables.set(\"endDate\", endDateFormatted);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"The start date cannot be in the past or later than the end date\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"startDate\": \"{{startDate}}\",\r\n  \"endDate\": \"{{endDate}}\",\r\n  \"customerId\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/Bookings",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"Bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create booking (T-)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const today = new Date();\r",
+									"\r",
+									"const startDate = new Date(today);\r",
+									"startDate.setDate(today.getDate() -5);\r",
+									"\r",
+									"const endDate = new Date(today);\r",
+									"endDate.setDate(today.getDate() + 3);\r",
+									"\r",
+									"const startDateFormatted = startDate.toISOString().split('T')[0]; \r",
+									"const endDateFormatted = endDate.toISOString().split('T')[0]; \r",
+									"\r",
+									"pm.variables.set(\"startDate\", startDateFormatted);\r",
+									"pm.variables.set(\"endDate\", endDateFormatted);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"The start date cannot be in the past or later than the end date\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"startDate\": \"{{startDate}}\",\r\n  \"endDate\": \"{{endDate}}\",\r\n  \"customerId\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/Bookings",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"Bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create booking (AB)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const today = new Date();\r",
+									"\r",
+									"const startDate = new Date(today);\r",
+									"startDate.setDate(today.getDate() -5);\r",
+									"\r",
+									"const endDate = new Date(today);\r",
+									"endDate.setDate(today.getDate() + 3);\r",
+									"\r",
+									"const startDateFormatted = startDate.toISOString().split('T')[0]; \r",
+									"const endDateFormatted = endDate.toISOString().split('T')[0]; \r",
+									"\r",
+									"pm.variables.set(\"startDate\", startDateFormatted);\r",
+									"pm.variables.set(\"endDate\", endDateFormatted);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"The start date cannot be in the past or later than the end date\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"startDate\": \"{{startDate}}\",\r\n  \"endDate\": \"{{endDate}}\",\r\n  \"customerId\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/Bookings",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"Bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create booking (B-B+)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const today = new Date();\r",
+									"\r",
+									"const startDate = new Date(today);\r",
+									"startDate.setDate(today.getDate() -5);\r",
+									"\r",
+									"const endDate = new Date(today);\r",
+									"endDate.setDate(today.getDate() + 3);\r",
+									"\r",
+									"const startDateFormatted = startDate.toISOString().split('T')[0]; \r",
+									"const endDateFormatted = endDate.toISOString().split('T')[0]; \r",
+									"\r",
+									"pm.variables.set(\"startDate\", startDateFormatted);\r",
+									"pm.variables.set(\"endDate\", endDateFormatted);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"The start date cannot be in the past or later than the end date\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"startDate\": \"{{startDate}}\",\r\n  \"endDate\": \"{{endDate}}\",\r\n  \"customerId\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/Bookings",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"Bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create booking (A-A+)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const today = new Date();\r",
+									"\r",
+									"const startDate = new Date(today);\r",
+									"startDate.setDate(today.getDate() -5);\r",
+									"\r",
+									"const endDate = new Date(today);\r",
+									"endDate.setDate(today.getDate() + 3);\r",
+									"\r",
+									"const startDateFormatted = startDate.toISOString().split('T')[0]; \r",
+									"const endDateFormatted = endDate.toISOString().split('T')[0]; \r",
+									"\r",
+									"pm.variables.set(\"startDate\", startDateFormatted);\r",
+									"pm.variables.set(\"endDate\", endDateFormatted);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"The start date cannot be in the past or later than the end date\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"startDate\": \"{{startDate}}\",\r\n  \"endDate\": \"{{endDate}}\",\r\n  \"customerId\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/Bookings",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"Bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create booking (BT)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const today = new Date();\r",
+									"\r",
+									"const startDate = new Date(today);\r",
+									"startDate.setDate(today.getDate() -5);\r",
+									"\r",
+									"const endDate = new Date(today);\r",
+									"endDate.setDate(today.getDate() + 3);\r",
+									"\r",
+									"const startDateFormatted = startDate.toISOString().split('T')[0]; \r",
+									"const endDateFormatted = endDate.toISOString().split('T')[0]; \r",
+									"\r",
+									"pm.variables.set(\"startDate\", startDateFormatted);\r",
+									"pm.variables.set(\"endDate\", endDateFormatted);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"The start date cannot be in the past or later than the end date\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"startDate\": \"{{startDate}}\",\r\n  \"endDate\": \"{{endDate}}\",\r\n  \"customerId\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/Bookings",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"Bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create booking (BP)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const today = new Date();\r",
+									"\r",
+									"const startDate = new Date(today);\r",
+									"startDate.setDate(today.getDate() -5);\r",
+									"\r",
+									"const endDate = new Date(today);\r",
+									"endDate.setDate(today.getDate() + 3);\r",
+									"\r",
+									"const startDateFormatted = startDate.toISOString().split('T')[0]; \r",
+									"const endDateFormatted = endDate.toISOString().split('T')[0]; \r",
+									"\r",
+									"pm.variables.set(\"startDate\", startDateFormatted);\r",
+									"pm.variables.set(\"endDate\", endDateFormatted);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"The start date cannot be in the past or later than the end date\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"startDate\": \"{{startDate}}\",\r\n  \"endDate\": \"{{endDate}}\",\r\n  \"customerId\": 1\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/Bookings",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"Bookings"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
