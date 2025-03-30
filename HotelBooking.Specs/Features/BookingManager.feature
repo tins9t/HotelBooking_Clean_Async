@@ -5,7 +5,7 @@ Tests of dates for create booking method
 # Fully occupied periods where no rooms are available:
 # From DateTime.Today.AddDays(10) to DateTime.Today.AddDays(20)
 
-@mytag
+@validBooking
 Scenario: Create booking with valid dates
 	Given the first number is <startDays>
 	And the second number is <endDays>
@@ -20,7 +20,7 @@ Examples:
   | 22        | 30      | // SD: A, ED: A
 
 
-@mytag
+@occupiedDates
 Scenario: Create booking with occupied dates
 	Given the first number is <startDays>
 	And the second number is <endDays>
@@ -37,7 +37,7 @@ Examples:
 
 
 
-@mytag
+@invalidDates
 Scenario: Create booking with invalid dates
 	Given the first number is <startDays>
 	And the second number is <endDays>
