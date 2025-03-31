@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "77d3f303-5f91-449f-9aa6-45483fa592a4",
-		"name": "New Collection",
+		"_postman_id": "c81a967a-da96-4a51-b8f0-91df386571f0",
+		"name": "New Collection Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "43559072"
+		"_exporter_id": "29114644"
 	},
 	"item": [
 		{
@@ -169,9 +169,11 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Response status is 409 Created\", function () {\r",
+									"pm.test(\"Response status is 409 Created, and body contains specific message\", function () {\r",
 									"    pm.response.to.have.status(409);\r",
-									"});"
+									"    pm.expect(pm.response.text()).to.include(\"The booking could not be created. All rooms are occupied. Please try another period.\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -234,9 +236,11 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Response status is 409 Created\", function () {\r",
+									"pm.test(\"Response status is 409 Created, and body contains specific message\", function () {\r",
 									"    pm.response.to.have.status(409);\r",
-									"});"
+									"    pm.expect(pm.response.text()).to.include(\"The booking could not be created. All rooms are occupied. Please try another period.\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -299,9 +303,11 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Response status is 409 Created\", function () {\r",
+									"pm.test(\"Response status is 409 Created, and body contains specific message\", function () {\r",
 									"    pm.response.to.have.status(409);\r",
-									"});"
+									"    pm.expect(pm.response.text()).to.include(\"The booking could not be created. All rooms are occupied. Please try another period.\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -364,9 +370,11 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Response status is 409 Created\", function () {\r",
+									"pm.test(\"Response status is 409 Created, and body contains specific message\", function () {\r",
 									"    pm.response.to.have.status(409);\r",
-									"});"
+									"    pm.expect(pm.response.text()).to.include(\"The booking could not be created. All rooms are occupied. Please try another period.\");\r",
+									"});\r",
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
